@@ -5,9 +5,30 @@ namespace PromotionEngine.Domain.Services
 {
     public class PromotionService : IPromotionService
     {
-        public void AddProducts(params ProductBase[] args)
+        private readonly IPromotionRuleRepository promotionRuleRepository;
+        private readonly IProductRepository productRepository;
+
+        public PromotionService(IPromotionRuleRepository promotionRuleRepository, IProductRepository productRepository)
         {
-            throw new System.NotImplementedException();
+            this.promotionRuleRepository = promotionRuleRepository;
+            this.productRepository = productRepository;
+        }
+
+        public decimal CalculateOrderTotal(Order order)
+        {
+            var cart = order.Cart;
+            decimal total = 0;
+
+            var nextRule = this.promotionRuleRepository.GetPromotionRules();
+
+            do
+            {
+                var result = nextRule.ApplyRule(cart);
+                total += result.Price;
+                nextRule = result.NextRule;
+            } while (nextRule != null);
+
+            return total;
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using PromotionEngine.Core.Models;
+using System.Collections.Generic;
 
 namespace PromotionEngine.Core.Interfaces
 {
     public interface IPromotionService
     {
-        void AddProducts(params ProductBase[] args);
+        decimal CalculateOrderTotal(Order order);
     }
 }

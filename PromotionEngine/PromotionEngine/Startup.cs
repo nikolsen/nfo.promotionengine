@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PromotionEngine.Core.Interfaces;
 using PromotionEngine.Domain.Services;
+using PromotionEngine.Infrastructure.Factories;
 using PromotionEngine.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace PromotionEngineDemo
             services.AddControllersWithViews();
             services.AddSingleton<IPromotionService, PromotionService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IPromotionRuleRepository, PromotionRuleRepository>();
+            services.AddSingleton<IPromotionRuleFactory, PromotionRuleFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
