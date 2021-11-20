@@ -1,6 +1,14 @@
 ﻿namespace PromotionEngine.Core.Models
 {
-    internal abstract class ProductBase
+    public abstract class ProductBase
     {
+        public string SKU { get; }
+        public decimal Price { get; }
+
+        protected ProductBase(string sku, decimal price)
+        {
+            SKU = sku;
+            Price = price;
+        }
     }
 }
