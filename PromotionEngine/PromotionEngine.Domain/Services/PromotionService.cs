@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PromotionEngine.Core.Interfaces;
 using PromotionEngine.Core.Models;
 
@@ -17,22 +18,33 @@ namespace PromotionEngine.Domain.Services
 
         public decimal CalculateOrderTotal(Order order)
         {
-            var cart = order.Cart;
-            decimal total = 0;
+            var currentRule = promotionRuleRepository.GetPromotionRules();
 
-            var nextRule = this.promotionRuleRepository.GetPromotionRules();
+            if(currentRule == null)
+            {
+                return GetPriceSumOfSKUs(order.Cart);
+            }
+
+            var cart = order.Cart.Select(item => item).ToList();
+            decimal total = 0;
 
             do
             {
-                var result = nextRule.ApplyRule(ref cart);
+                var result = currentRule.ApplyRule(ref cart);
                 total += result.Price;
-                nextRule = result.NextRule;
-            } while (nextRule != null);
+                currentRule = result.Match ? currentRule : currentRule.Next;
+            } while (currentRule != null);
 
-            var allPrices = productRepository.GetAllPrices();
-            total += cart.Sum(sku => allPrices.FirstOrDefault(i => i.Id == sku).Price);
+            // Add prices of remaining items in cart after rule application.
+            total += GetPriceSumOfSKUs(cart);
 
             return total;
+        }
+
+        private decimal GetPriceSumOfSKUs(IEnumerable<char> skus)
+        {
+            var allPrices = productRepository.GetAllPrices();
+            return skus.Sum(sku => allPrices.FirstOrDefault(i => i.Id == sku).Price);
         }
     }
 }

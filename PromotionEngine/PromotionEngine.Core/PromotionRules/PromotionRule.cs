@@ -5,7 +5,7 @@ namespace PromotionEngine.Core.PromotionRules
 {
     public abstract class PromotionRule
     {
-        protected PromotionRule Next { get; }
+        public PromotionRule Next { get; }
 
         public PromotionRule(PromotionRule next)
         {

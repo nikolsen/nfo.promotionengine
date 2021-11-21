@@ -25,14 +25,10 @@ namespace PromotionEngine.Core.PromotionRules
             }
 
             // When all skus included in this rule have been removed from tempCart, there is match.
-            if (tempCart.Count == cart.Count - _includedSKUs.Length)
-            {
-                cart = tempCart;
-                return new RuleCalculationResult(true, _price, this);
-            }
-
-            // No match.
-            return new RuleCalculationResult(false, 0, Next);
+            var isMatch = tempCart.Count == cart.Count - _includedSKUs.Length;
+            cart = isMatch ? tempCart : cart;
+            
+            return new RuleCalculationResult(isMatch, isMatch ? _price : 0);
         }
     }
 }
