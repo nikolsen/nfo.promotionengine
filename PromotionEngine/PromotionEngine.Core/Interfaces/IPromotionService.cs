@@ -1,5 +1,4 @@
 ﻿using PromotionEngine.Core.Models;
-using System.Collections.Generic;
 
 namespace PromotionEngine.Core.Interfaces
 {

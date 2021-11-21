@@ -1,15 +1,15 @@
-﻿using PromotionEngine.Core.Interfaces;
+﻿using System.Linq;
+using PromotionEngine.Core.Interfaces;
 using PromotionEngine.Core.Models;
-using System.Linq;
 
 namespace PromotionEngine.Domain.Services
 {
     public class PromotionService : IPromotionService
     {
         private readonly IPromotionRuleRepository promotionRuleRepository;
-        private readonly IProductRepository productRepository;
+        private readonly IPriceRepository productRepository;
 
-        public PromotionService(IPromotionRuleRepository promotionRuleRepository, IProductRepository productRepository)
+        public PromotionService(IPromotionRuleRepository promotionRuleRepository, IPriceRepository productRepository)
         {
             this.promotionRuleRepository = promotionRuleRepository;
             this.productRepository = productRepository;
@@ -29,8 +29,8 @@ namespace PromotionEngine.Domain.Services
                 nextRule = result.NextRule;
             } while (nextRule != null);
 
-            var items = productRepository.GetProducts();
-            total += cart.Sum(sku => items.FirstOrDefault(i => i.SKU == sku).Price);
+            var allPrices = productRepository.GetAllPrices();
+            total += cart.Sum(sku => allPrices.FirstOrDefault(i => i.Id == sku).Price);
 
             return total;
         }

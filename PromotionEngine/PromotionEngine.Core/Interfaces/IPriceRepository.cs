@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace PromotionEngine.Core.Interfaces
 {
-    public interface IProductRepository
+    public interface IPriceRepository
     {
-        IEnumerable<ProductBase> GetProducts();
+        IEnumerable<SKUPrice> GetAllPrices();
     }
 }

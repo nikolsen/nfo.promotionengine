@@ -1,7 +1,6 @@
-﻿using PromotionEngine.Core.Models;
-using System;
+﻿using Xunit;
 using System.Collections.Generic;
-using Xunit;
+using PromotionEngine.Core.Models;
 
 namespace PromotionEngine.Tests
 {

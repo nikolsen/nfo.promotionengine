@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using PromotionEngine.Core.Interfaces;
 using PromotionEngineDemo;
-using System;
 
 namespace PromotionEngine.Tests
 {
@@ -10,7 +10,7 @@ namespace PromotionEngine.Tests
     {
         private readonly TestServer _testServer;
         public IPromotionService PromotionService => _testServer.Services.GetService(typeof(IPromotionService)) as IPromotionService;
-        public IProductRepository ProductRepository => _testServer.Services.GetService(typeof(IProductRepository)) as IProductRepository;
+        public IPriceRepository ProductRepository => _testServer.Services.GetService(typeof(IPriceRepository)) as IPriceRepository;
 
         public PromotionEngineFixture()
         {

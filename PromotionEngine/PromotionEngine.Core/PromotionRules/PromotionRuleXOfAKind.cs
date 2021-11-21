@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
 using PromotionEngine.Core.Models;
 
 namespace PromotionEngine.Core.PromotionRules
