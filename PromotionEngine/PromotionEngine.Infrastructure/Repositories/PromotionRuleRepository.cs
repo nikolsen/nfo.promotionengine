@@ -13,6 +13,11 @@ namespace PromotionEngine.Infrastructure.Repositories
             this.promotionRuleFactory = promotionRuleFactory;
         }
 
+        /// <summary>
+        /// Get the first item in the collection of promotion rules to evaluate against. 
+        /// Subsequent rules are accessed by iterating the chain using the Next property of each rule.
+        /// </summary>
+        /// <returns>The first instance in the chain of promotion rules.</returns>
         public PromotionRule GetPromotionRules()
         {
             var data = new List<(string ruleId, char[] skus, decimal value)>()

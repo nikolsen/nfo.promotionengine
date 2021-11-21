@@ -16,6 +16,11 @@ namespace PromotionEngine.Domain.Services
             this.productRepository = productRepository;
         }
 
+        /// <summary>
+        /// Calculates the total price of SKUs in a provided order.
+        /// </summary>
+        /// <param name="order">An instance of Order</param>
+        /// <returns>The total price of the provided order.</returns>
         public decimal CalculateOrderTotal(Order order)
         {
             var currentRule = promotionRuleRepository.GetPromotionRules();
@@ -41,6 +46,11 @@ namespace PromotionEngine.Domain.Services
             return total;
         }
 
+        /// <summary>
+        /// Calculates the total price of a collection of SKUs
+        /// </summary>
+        /// <param name="skus"></param>
+        /// <returns>The total price of provided SKUs</returns>
         private decimal GetPriceSumOfSKUs(IEnumerable<char> skus)
         {
             var allPrices = productRepository.GetAllPrices();

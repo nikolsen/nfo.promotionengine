@@ -12,6 +12,11 @@ namespace PromotionEngine.Core.PromotionRules
             Next = next;
         }
 
+        /// <summary>
+        /// Apply promotion rule on the provided list of SKUs
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         public abstract RuleCalculationResult ApplyRule(ref List<char> cart);
     }
 }

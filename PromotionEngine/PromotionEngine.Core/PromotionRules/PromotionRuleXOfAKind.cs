@@ -14,6 +14,11 @@ namespace PromotionEngine.Core.PromotionRules
             _price = price;
         }
 
+        /// <summary>
+        /// Applies the rule defined by a any given combination of SKUs present in the provided list of SKUs.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         public override RuleCalculationResult ApplyRule(ref List<char> cart)
         {
             var tempCart = cart.Select(s => s).ToList();
