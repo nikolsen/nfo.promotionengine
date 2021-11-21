@@ -12,6 +12,6 @@ namespace PromotionEngine.Core.PromotionRules
             Next = next;
         }
 
-        public abstract RuleCalculationResult ApplyRule(List<char> cart);
+        public abstract RuleCalculationResult ApplyRule(ref List<char> cart);
     }
 }

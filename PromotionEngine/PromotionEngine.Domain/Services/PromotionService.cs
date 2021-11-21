@@ -23,7 +23,7 @@ namespace PromotionEngine.Domain.Services
 
             do
             {
-                var result = nextRule.ApplyRule(cart);
+                var result = nextRule.ApplyRule(ref cart);
                 total += result.Price;
                 nextRule = result.NextRule;
             } while (nextRule != null);

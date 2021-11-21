@@ -1,18 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PromotionEngine.Core.Models;
 
 namespace PromotionEngine.Core.PromotionRules
 {
     public class PromotionRuleXOfAKind : PromotionRule
     {
-        public PromotionRuleXOfAKind(PromotionRule next, decimal price, params char[] args) : base(next) { }
+        private readonly char[] _includedSKUs;
+        private readonly decimal _price;
 
-        public override RuleCalculationResult ApplyRule(List<char> cart)
+        public PromotionRuleXOfAKind(PromotionRule next, decimal price, params char[] skus) : base(next) {
+            _includedSKUs = skus;
+            _price = price;
+        }
+
+        public override RuleCalculationResult ApplyRule(ref List<char> cart)
         {
-            // TODO: Implement rule
+            var tempCart = cart.Select(s => s).ToList();
 
-            return new RuleCalculationResult(0, Next);
+            foreach(var sku in _includedSKUs)
+            {
+                // Removes first occurence of sku in question.
+                tempCart.Remove(sku);
+            }
+
+            // When all skus included in this rule have been removed from tempCart, there is match.
+            if (tempCart.Count == cart.Count - _includedSKUs.Length)
+            {
+                cart = tempCart;
+                return new RuleCalculationResult(true, _price, this);
+            }
+
+            // No match.
+            return new RuleCalculationResult(false, 0, Next);
         }
     }
 }
