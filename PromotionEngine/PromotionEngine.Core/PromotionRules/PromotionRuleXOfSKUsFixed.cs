@@ -4,12 +4,12 @@ using PromotionEngine.Core.Models;
 
 namespace PromotionEngine.Core.PromotionRules
 {
-    public class PromotionRuleXOfAKind : PromotionRule
+    public class PromotionRuleXOfSKUsFixed : PromotionRule
     {
         private readonly char[] _includedSKUs;
         private readonly decimal _price;
 
-        public PromotionRuleXOfAKind(PromotionRule next, decimal price, params char[] skus) : base(next) {
+        public PromotionRuleXOfSKUsFixed(PromotionRule next, decimal price, params char[] skus) : base(next) {
             _includedSKUs = skus;
             _price = price;
         }
@@ -17,9 +17,9 @@ namespace PromotionEngine.Core.PromotionRules
         /// <summary>
         /// Applies the rule defined by a any given combination of SKUs present in the provided list of SKUs.
         /// </summary>
-        /// <param name="cart"></param>
-        /// <returns></returns>
-        public override RuleCalculationResult ApplyRule(ref List<char> cart)
+        /// <param name="cart">A collection of SKUs to examine for rule match</param>
+        /// <returns>An instance of RuleCalculationResult with indication of a match and promoted price.</returns>
+        public override RuleCalculationResult ApplyRule(ref List<char> cart, IEnumerable<SKUPrice> allPrices)
         {
             var tempCart = cart.Select(s => s).ToList();
 

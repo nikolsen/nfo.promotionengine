@@ -17,6 +17,6 @@ namespace PromotionEngine.Core.PromotionRules
         /// </summary>
         /// <param name="cart"></param>
         /// <returns></returns>
-        public abstract RuleCalculationResult ApplyRule(ref List<char> cart);
+        public abstract RuleCalculationResult ApplyRule(ref List<char> cart, IEnumerable<SKUPrice> allPrices);
     }
 }

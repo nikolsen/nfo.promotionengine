@@ -22,9 +22,10 @@ namespace PromotionEngine.Infrastructure.Repositories
         {
             var data = new List<(string ruleId, char[] skus, decimal value)>()
             {
-                ("XOfAKind", new char[] { 'C', 'D' }, 30),
-                ("XOfAKind", new char[] { 'B', 'B' }, 45),
-                ("XOfAKind", new char[] { 'A', 'A', 'A' }, 130)
+                ("XOfSKUsFixed", new char[] { 'C', 'D' }, 30),
+                ("XOfSKUsFixed", new char[] { 'B', 'B' }, 45),
+                ("XOfSKUsFixed", new char[] { 'A', 'A', 'A' }, 130),
+                ("XOfSKUsPct", new char[] { 'D', 'D' }, 0.1M)
             };
 
             PromotionRule currentRule = null;

@@ -24,8 +24,9 @@ namespace PromotionEngine.Domain.Services
         public decimal CalculateOrderTotal(Order order)
         {
             var currentRule = promotionRuleRepository.GetPromotionRules();
+            var allSKUPrices = GetAllPrices();
 
-            if(currentRule == null)
+            if (currentRule == null)
             {
                 return GetPriceSumOfSKUs(order.Cart);
             }
@@ -35,8 +36,8 @@ namespace PromotionEngine.Domain.Services
 
             do
             {
-                var result = currentRule.ApplyRule(ref cart);
-                total += result.Price;
+                var result = currentRule.ApplyRule(ref cart, allSKUPrices);
+                total += result.Match ? result.Price : 0;
                 currentRule = result.Match ? currentRule : currentRule.Next;
             } while (currentRule != null);
 

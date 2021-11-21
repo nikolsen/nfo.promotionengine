@@ -15,9 +15,14 @@ namespace PromotionEngine.Infrastructure.Factories
         /// <exception cref="NotImplementedException">An exception is raised if no rule is found for provided rule id.</exception>
         public PromotionRule Create((string ruleId, char[] skus, decimal value) dataItem, PromotionRule next)
         {
-            if(dataItem.ruleId == "XOfAKind")
+            if(dataItem.ruleId == "XOfSKUsFixed")
             {
-                return new PromotionRuleXOfAKind(next, dataItem.value, dataItem.skus);
+                return new PromotionRuleXOfSKUsFixed(next, dataItem.value, dataItem.skus);
+            }
+
+            if (dataItem.ruleId == "XOfSKUsPct")
+            {
+                return new PromotionRuleXOfSKUsPct(next, dataItem.value, dataItem.skus);
             }
 
             throw new NotImplementedException($"Rule: {dataItem.ruleId} not handled.");

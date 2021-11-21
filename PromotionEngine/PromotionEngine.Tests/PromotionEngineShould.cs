@@ -39,5 +39,14 @@ namespace PromotionEngine.Tests
 
             Assert.Equal(280, total);
         }
+
+        [Fact]
+        public void Calculate_Total_Subtract_10pct_For_2X_D()
+        {
+            var order = new Order(new List<char>() { 'A', 'B', 'B', 'D', 'D' });
+            var total = _fixture.PromotionService.CalculateOrderTotal(order);
+
+            Assert.Equal(122, total);
+        }
     }
 }
