@@ -8,12 +8,12 @@ namespace PromotionEngine.Domain.Services
     public class PromotionService : IPromotionService
     {
         private readonly IPromotionRuleRepository promotionRuleRepository;
-        private readonly IPriceRepository productRepository;
+        private readonly IPriceRepository priceRepository;
 
-        public PromotionService(IPromotionRuleRepository promotionRuleRepository, IPriceRepository productRepository)
+        public PromotionService(IPromotionRuleRepository promotionRuleRepository, IPriceRepository priceRepository)
         {
             this.promotionRuleRepository = promotionRuleRepository;
-            this.productRepository = productRepository;
+            this.priceRepository = priceRepository;
         }
 
         /// <summary>
@@ -47,13 +47,22 @@ namespace PromotionEngine.Domain.Services
         }
 
         /// <summary>
+        /// Get the list of prices for all SKUs in the system.
+        /// </summary>
+        /// <returns>A list of price instances for all available SKUs.</returns>
+        public IEnumerable<SKUPrice> GetAllPrices()
+        {
+            return priceRepository.GetAllPrices();
+        }
+
+        /// <summary>
         /// Calculates the total price of a collection of SKUs
         /// </summary>
-        /// <param name="skus"></param>
+        /// <param name="skus">A collection of SKUs</param>
         /// <returns>The total price of provided SKUs</returns>
         private decimal GetPriceSumOfSKUs(IEnumerable<char> skus)
         {
-            var allPrices = productRepository.GetAllPrices();
+            var allPrices = priceRepository.GetAllPrices();
             return skus.Sum(sku => allPrices.FirstOrDefault(i => i.Id == sku).Price);
         }
     }
