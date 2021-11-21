@@ -1,0 +1,28 @@
+﻿
+.promotion-engine {
+	margin-top: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.promotion-engine button.promotion-engine-cta {
+	background: white;
+	border: 1px solid black;
+	border-radius: 10px;
+	font-size: 40px;
+	padding: 20px;
+}
+
+.promotion-engine input.promotion-engine-skus-input {
+	border: 1px solid black;
+	border-radius: 10px;
+	font-size: 25px;
+	padding: 20px;
+}
+
+.promotion-engine .promotion-engine-total
+{
+	font-size: 25px;
+}

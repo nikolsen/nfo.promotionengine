@@ -19,10 +19,10 @@ namespace PromotionEngine.Api
         }
 
         [HttpGet]
-        public decimal Get(string skus)
+        public decimal Get(string skus = "")
         {
             // Get sanitized list of provided skus => remove unavailable items.
-            var items = skus.Split(',').ToList();
+            var items = skus?.Split(',').ToList() ?? new List<string>();
             var prices = promotionService.GetAllPrices().ToList();
 
             if (items.Any(item => !prices.Exists(p => p.Id.ToString() == item)))

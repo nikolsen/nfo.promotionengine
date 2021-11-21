@@ -1,8 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Promotion Engine";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center promotion-engine">
+    <div class="promotion-engine-skus">
+        <input type="text" placeholder="Eg: A,B,D" class="promotion-engine-skus-input" />
+    </div>
+    <button type="button" class="promotion-engine-cta mt-5">
+        Get total
+    </button>
+    <div class="promotion-engine-total mt-5">
+        Fill in the SKUs separated by commas and click "Get total" to retrieve price.
+    </div>
 </div>
+
