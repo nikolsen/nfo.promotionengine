@@ -1,4 +1,4 @@
-﻿$('.promotion-engine-cta').click(
+﻿$('.promotion-engine-calculate-cta').click(
 	() => {
 		var totalContainer = $('.promotion-engine-total');
 		var value = $('.promotion-engine input.promotion-engine-skus-input').val().toUpperCase().replace(/ /g, '');

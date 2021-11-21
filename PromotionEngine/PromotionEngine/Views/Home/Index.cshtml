@@ -1,12 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Promotion Engine";
 }
-
-<div class="text-center promotion-engine">
+<div class="promotion-engine">
+    <header>
+        <h1>
+            Promotion Engine
+        </h1>
+        <p>
+            Calculate total price from a list of SKUs
+        </p>
+    </header>
     <div class="promotion-engine-skus">
         <input type="text" placeholder="Eg: A,B,D" class="promotion-engine-skus-input" />
     </div>
-    <button type="button" class="promotion-engine-cta mt-5">
+    <button type="button" class="promotion-engine-calculate-cta mt-5">
         Get total
     </button>
     <div class="promotion-engine-total mt-5">
