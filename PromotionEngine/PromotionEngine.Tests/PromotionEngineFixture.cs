@@ -10,8 +10,7 @@ namespace PromotionEngine.Tests
     {
         private readonly TestServer _testServer;
         public IPromotionService PromotionService => _testServer.Services.GetService(typeof(IPromotionService)) as IPromotionService;
-        public IPriceRepository ProductRepository => _testServer.Services.GetService(typeof(IPriceRepository)) as IPriceRepository;
-
+        
         public PromotionEngineFixture()
         {
             var builder = new WebHostBuilder();
@@ -24,7 +23,7 @@ namespace PromotionEngine.Tests
 
         public void Dispose()
         {
-            // TODO: Cleanup
+            _testServer.Dispose();
         }
     }
 }
