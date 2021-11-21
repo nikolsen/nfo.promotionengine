@@ -1,5 +1,6 @@
 ﻿using PromotionEngine.Core.Interfaces;
 using PromotionEngine.Core.Models;
+using System.Linq;
 
 namespace PromotionEngine.Domain.Services
 {
@@ -27,6 +28,9 @@ namespace PromotionEngine.Domain.Services
                 total += result.Price;
                 nextRule = result.NextRule;
             } while (nextRule != null);
+
+            var items = productRepository.GetProducts();
+            total += cart.Sum(sku => items.FirstOrDefault(i => i.SKU == sku).Price);
 
             return total;
         }

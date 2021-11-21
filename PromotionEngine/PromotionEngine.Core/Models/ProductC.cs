@@ -2,7 +2,7 @@
 {
     public class ProductC : ProductBase
     {
-        public ProductC(string sku, decimal price) : base(sku, price) { }
+        public ProductC(char sku, decimal price) : base(sku, price) { }
 
         // Product specific properties
     }

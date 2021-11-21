@@ -10,10 +10,10 @@ namespace PromotionEngine.Infrastructure.Repositories
         {
             return new List<ProductBase>()
             {
-                new ProductA("A", 50),
-                new ProductB("B", 30),
-                new ProductC("C", 20),
-                new ProductD("D", 15)
+                new ProductA('A', 50),
+                new ProductB('B', 30),
+                new ProductC('C', 20),
+                new ProductD('D', 15)
             };
         }
     }
